@@ -12,6 +12,8 @@
     ;; Routes
     [klang.guestbook.web.routes.api]
     [klang.guestbook.web.routes.pages]
+    [kit.edge.db.sql.conman]
+    [kit.edge.db.sql.migratus]
     )
   (:gen-class))
 
