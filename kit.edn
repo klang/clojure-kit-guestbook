@@ -1,0 +1,8 @@
+{:full-name "klang/guestbook"
+ :ns-name   "klang.guestbook"
+ :sanitized "klang/guestbook"
+ :name      "guestbook"
+ :modules   {:root         "modules"
+             :repositories [{:url  "https://github.com/kit-clj/modules.git"
+                             :tag  "master"
+                             :name "kit-modules"}]}}
