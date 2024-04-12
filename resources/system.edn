@@ -49,4 +49,6 @@
  :router/core
  {:routes #ig/ref :router/routes
   :env #ig/ref :system/env}   
+ :reitit.routes/pages {:base.path "",
+                       :env #ig/ref :system/env}
 }

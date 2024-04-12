@@ -11,6 +11,7 @@
 
     ;; Routes
     [klang.guestbook.web.routes.api]
+    [klang.guestbook.web.routes.pages]
     )
   (:gen-class))
 

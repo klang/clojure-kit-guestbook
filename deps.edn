@@ -22,6 +22,8 @@
            ;; kit Libs
            io.github.kit-clj/kit-core {:mvn/version "1.0.6"}
            io.github.kit-clj/kit-undertow {:mvn/version "1.0.6"}
+           selmer/selmer {:mvn/version "1.12.50"}
+           luminus/ring-ttl-session {:mvn/version "0.3.3"}
            }
  :aliases {:build {:deps {io.github.clojure/tools.build {:mvn/version "0.9.6"}}
                    :ns-default build}
