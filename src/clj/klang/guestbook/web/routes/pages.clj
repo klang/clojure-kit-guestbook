@@ -5,7 +5,9 @@
     [integrant.core :as ig]
     [reitit.ring.middleware.muuntaja :as muuntaja]
     [reitit.ring.middleware.parameters :as parameters]
-    [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]))
+    [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
+    [klang.guestbook.web.routes.utils :as utils]
+    [klang.guestbook.web.controllers.guestbook :as guestbook]))
 
 (defn wrap-page-defaults []
   (let [error-page (layout/error-page
@@ -13,12 +15,14 @@
                       :title "Invalid anti-forgery token"})]
     #(wrap-anti-forgery % {:error-response error-page})))
 
-(defn home [request]
-  (layout/render request "home.html"))
+(defn home [{:keys [query-fn]} {:keys [flash] :as request}]
+  (layout/render request "home.html" {:messages (query-fn :get-messages {})
+                                      :errors (:errors flash)}))
 
 ;; Routes
-(defn page-routes [_opts]
-  [["/" {:get home}]])
+(defn page-routes [opts]
+  [["/" {:get (partial home opts)}]
+   ["/save-message" {:post (partial guestbook/save-message! opts)}]])
 
 (defn route-data [opts]
   (merge
