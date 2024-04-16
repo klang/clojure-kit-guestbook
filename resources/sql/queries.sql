@@ -8,3 +8,6 @@ VALUES (:name, :message)
 -- :name get-messages :? :*
 -- :doc selects all available messages
 SELECT * FROM guestbook
+
+-- :name delete-message-by-id! :! :n
+delete from guestbook where id = :id

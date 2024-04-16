@@ -25,6 +25,10 @@
                           <time>{{item.timestamp}}</time>
                           <p>{{item.message}}</p>
                           <p> - {{item.name}}</p>
+                          <form method="POST" action="/delete-message">
+                            {% csrf-field %}
+                            <button name="id" value="{{item.id}}" class="button is-secondary has-text-dark">delete</button>
+                          </form>
                       </li>
                       {% endfor %}
                   </ul>

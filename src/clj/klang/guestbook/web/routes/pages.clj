@@ -22,6 +22,7 @@
 ;; Routes
 (defn page-routes [opts]
   [["/" {:get (partial home opts)}]
+   ["/delete-message" {:post guestbook/delete-message-by-id!}]
    ["/save-message" {:post (partial guestbook/save-message! opts)}]])
 
 (defn route-data [opts]
