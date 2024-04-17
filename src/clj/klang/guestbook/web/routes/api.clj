@@ -1,5 +1,6 @@
 (ns klang.guestbook.web.routes.api
   (:require
+    [klang.guestbook.web.controllers.guestbook :as guestbook]
     [klang.guestbook.web.controllers.health :as health]
     [klang.guestbook.web.middleware.exception :as exception]
     [klang.guestbook.web.middleware.formats :as formats]
@@ -10,26 +11,29 @@
     [reitit.ring.middleware.parameters :as parameters]
     [reitit.swagger :as swagger]))
 
-(def route-data
-  {:coercion   malli/coercion
-   :muuntaja   formats/instance
-   :swagger    {:id ::api}
-   :middleware [;; query-params & form-params
-                parameters/parameters-middleware
+(defn route-data
+  [opts]
+  (merge
+    opts
+    {:coercion   malli/coercion
+     :muuntaja   formats/instance
+     :swagger    {:id ::api}
+     :middleware [;; query-params & form-params
+                  parameters/parameters-middleware
                   ;; content-negotiation
-                muuntaja/format-negotiate-middleware
+                  muuntaja/format-negotiate-middleware
                   ;; encoding response body
-                muuntaja/format-response-middleware
+                  muuntaja/format-response-middleware
                   ;; exception handling
-                coercion/coerce-exceptions-middleware
+                  coercion/coerce-exceptions-middleware
                   ;; decoding request body
-                muuntaja/format-request-middleware
+                  muuntaja/format-request-middleware
                   ;; coercing response bodys
-                coercion/coerce-response-middleware
+                  coercion/coerce-response-middleware
                   ;; coercing request parameters
-                coercion/coerce-request-middleware
+                  coercion/coerce-request-middleware
                   ;; exception handling
-                exception/wrap-exception]})
+                  exception/wrap-exception]}))
 
 ;; Routes
 (defn api-routes [_opts]
@@ -46,4 +50,4 @@
   [_ {:keys [base-path]
       :or   {base-path ""}
       :as   opts}]
-  (fn [] [base-path route-data (api-routes opts)]))
+  [base-path (route-data opts) (api-routes opts)])
