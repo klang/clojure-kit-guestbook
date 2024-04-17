@@ -31,3 +31,9 @@
                    items (count (query-fn :get-messages {}))]
                  {:status "up"
                   :message (str "count: " items)})}))
+
+(defn get-messages
+  [req]
+  (http-response/ok
+    (let [{:keys [query-fn]} (utils/route-data req)]
+                 (query-fn :get-messages {}))))
