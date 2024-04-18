@@ -41,6 +41,10 @@
     {:get {:no-doc  true
            :swagger {:info {:title "klang.guestbook API"}}
            :handler (swagger/create-swagger-handler)}}]
+   ["/save-message"
+    {:post {:parameters {:body {:name string?
+                                :message string?}}
+            :handler health/save-message!}}]
    ["/get-messages"
     {:get health/get-messages}]
    ["/health"

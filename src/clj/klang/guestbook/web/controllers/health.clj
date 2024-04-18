@@ -37,3 +37,9 @@
   (http-response/ok
     (let [{:keys [query-fn]} (utils/route-data req)]
                  (query-fn :get-messages {}))))
+
+(defn save-message!
+  [{{:keys [name message]} :body-params :as req}]
+  (http-response/ok
+   (let [{:keys [query-fn]} (utils/route-data req)]
+     {:result (query-fn :save-message! {:name name :message message})})))
