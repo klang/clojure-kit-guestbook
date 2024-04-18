@@ -43,3 +43,9 @@
   (http-response/ok
    (let [{:keys [query-fn]} (utils/route-data req)]
      {:result (query-fn :save-message! {:name name :message message})})))
+
+(defn delete-message-by-id!
+  [{{:keys [id]} :body-params :as req}]
+  (http-response/ok
+   (let [{:keys [query-fn]} (utils/route-data req)]
+     {:result (query-fn :delete-message-by-id! {:id id})})))

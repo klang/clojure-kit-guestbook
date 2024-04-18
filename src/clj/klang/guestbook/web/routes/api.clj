@@ -45,6 +45,9 @@
     {:post {:parameters {:body {:name string?
                                 :message string?}}
             :handler health/save-message!}}]
+   ["/delete-message-by-id"
+    {:post {:parameters {:body {:id string?}}
+            :handler health/delete-message-by-id!}}]
    ["/get-messages"
     {:get health/get-messages}]
    ["/health"
